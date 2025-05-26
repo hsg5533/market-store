@@ -1,5 +1,4 @@
-const fetch = require("node-fetch"),
-  db = require("./mysql.js"),
+const db = require("./mysql.js"),
   conn = db.init(),
   sendPushNotification = async (t, e, n) => {
     let o = await (
