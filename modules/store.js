@@ -188,9 +188,9 @@ module.exports = {
     }
   },
   getStoreSign: function (e, n) {
-    var o = "select * from store_contact where regnumber=" + e.params.regnumber;
+    var o = "select * from store_contact where regnumber=?";
     console.log("가맹점 서명 출력: " + o),
-      conn.query(o, function (o, t) {
+      conn.query(o, [e.params.regnumber], function (o, t) {
         if (o) console.log("가맹점 서명 출력 오류: " + o);
         else if (0 != t.length)
           try {
@@ -206,9 +206,9 @@ module.exports = {
       });
   },
   getStoreImg: function (e, n) {
-    var o = "select * from store_image where regnumber=" + e.params.regnumber;
+    var o = "select * from store_image where regnumber=?";
     console.log("가맹점 이미지 출력: " + o),
-      conn.query(o, function (e, o) {
+      conn.query(o, [e.params.regnumber], function (e, o) {
         e
           ? console.log("가맹점 이미지 출력 오류: " + e)
           : 0 != o.length
