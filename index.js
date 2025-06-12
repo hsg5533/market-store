@@ -3,8 +3,6 @@ const express = require("express"),
   logger = require("morgan"),
   cors = require("cors"),
   fs = require("fs"),
-  http = require("http"),
-  https = require("https"),
   qr = require("./modules/qr.js"),
   pay = require("./modules/pay.js"),
   log = require("./modules/log.js"),
@@ -33,15 +31,7 @@ const express = require("express"),
         o(null, t.originalname);
       },
     }),
-  }),
-  httpServer = http.createServer(app),
-  httpsServer = https.createServer(
-    {
-      key: fs.readFileSync("./keys/server.key"),
-      cert: fs.readFileSync("./keys/server.crt"),
-    },
-    app
-  );
+  });
 app.set("port", process.env.PORT || 3030),
   app.set("host", process.env.HOST || "0.0.0.0"),
   app.use(logger("dev")),
@@ -349,9 +339,6 @@ app.set("port", process.env.PORT || 3030),
   app.post("/payLog", (e, t) => {
     pay.payLog(e, t);
   }),
-  httpServer.listen(app.get("port"), app.get("host"), () =>
+  app.listen(app.get("port"), app.get("host"), () =>
     console.log("http 서버 대기중 : " + app.get("host") + ":" + app.get("port"))
-  ),
-  httpsServer.listen(3031, app.get("host"), () => {
-    console.log("https 서버 대기중 : " + app.get("host") + ":3031");
-  });
+  );
