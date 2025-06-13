@@ -55,7 +55,7 @@ module.exports = {
     }
   },
   getCategoryImg: function (e, o) {
-    var t = "select image from category where code=" + e.params.category_code;
+    var t = "select image from category where code=" + e.params.code;
     console.log("품목 이미지 출력: " + t),
       conn.query(t, function (e, t) {
         e

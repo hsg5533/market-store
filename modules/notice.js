@@ -1,4 +1,4 @@
-const fs = require("fs"),
+const fs = require("fs-extra"),
   db = require("./mysql.js"),
   conn = db.init();
 module.exports = {
