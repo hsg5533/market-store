@@ -15,7 +15,7 @@ module.exports = {
           console.log("상품 등록: " + r);
           var d = [
             t[0].product_code,
-            e.params.storecode,
+            e.params.code,
             n.category_code,
             n.name,
             n.regnumber,
@@ -56,7 +56,7 @@ module.exports = {
     "" == n.discount_price ? (n.discount = "n") : (n.discount = "y");
     var c =
       "update product set name=?,price=?,origin=?,amount=?,recommend=?,discount=?,discount_price=? where code=" +
-      e.params.product_code;
+      e.params.code;
     console.log("상품 수정: " + c);
     var t = [
       n.name,
@@ -86,8 +86,7 @@ module.exports = {
     });
   },
   getProductImg: function (e, o) {
-    var n =
-      "select * from product_image where product_code=" + e.params.product_code;
+    var n = "select * from product_image where product_code=" + e.params.code;
     console.log("상품 이미지 출력: " + n),
       conn.query(n, function (e, n) {
         e
@@ -170,7 +169,7 @@ module.exports = {
     });
   },
   deleteProduct: function (e, o) {
-    var n = "delete from product where code=" + e.params.product_code;
+    var n = "delete from product where code=" + e.params.code;
     console.log("상품 삭제: " + n),
       conn.query(n, function (e) {
         e ? console.log("상품 삭제 오류: " + e) : o.sendStatus(200);
